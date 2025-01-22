@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer app permanent clipped class="bg-indigo-lighten-1">
+    <v-navigation-drawer app permanent clipped >
       <v-list>
         <v-list-item title="My Application" subtitle="Vuetify" height="175"></v-list-item>
         <v-divider></v-divider>
@@ -14,11 +14,13 @@
     </v-navigation-drawer>
   </template>
   
-  <script setup>
-  const items = ["주제 1", "주제 2", "주제 3", "주제 4", "주제 5"];
-  </script>
+<script setup>
+import { ref } from 'vue';
+
+    const items = ["주제 1", "주제 2", "주제 3", "주제 4", "주제 5"];
+</script>
   
-  <style scoped>
+<style scoped>
   .v-navigation-drawer {
     width: 240px;
   }

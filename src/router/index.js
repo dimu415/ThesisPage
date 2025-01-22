@@ -14,6 +14,11 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import('@/views/Home.vue'),
       },
+      {
+        path: '/:MainCategory/:SubCategory',
+        name: 'PostList',
+        component: () => import('@/views/PostListPage.vue'),
+      },
     ],
   },
 ]

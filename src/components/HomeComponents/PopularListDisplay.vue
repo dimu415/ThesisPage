@@ -1,12 +1,12 @@
 <template>
-  <v-card class="mx-auto" flat color="orange">
+  <v-card class="mx-auto" flat >
         <!-- 카드 타이틀 -->
         <v-card-title>
           PopularList
         </v-card-title>
         <v-divider class="border-opacity-75" color="success" ></v-divider>
         <!-- 리스트 -->
-        <v-list lines="two" rounded="lg" class="rounded-xl" bg-color="green">
+        <v-list lines="two" rounded="lg" class="rounded-xl" >
           <v-list-item
             v-for="item in items"
             :key="item.id"

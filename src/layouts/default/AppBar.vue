@@ -1,9 +1,9 @@
 <template>
-  <v-app-bar app clipped-left height="150" class="bg-indigo-lighten-1">
+  <v-app-bar app clipped-left height="150" >
     <v-container>
       <!-- 첫 번째 줄: 타이틀  -->
       <v-row justify="center" class="mb-3 text-center">
-        <v-app-bar-title>
+        <v-app-bar-title @click="navigateToAbout">
           Title
         </v-app-bar-title>
       </v-row>
@@ -45,11 +45,13 @@
           </v-col>
         </v-row>
       <!-- 세 번째 줄: 카테고리 -->
+       <!--
       <v-row justify="start">
         <v-btn v-for="category in categories" :key="category" text class="mr-2">
           {{ category }}
         </v-btn>
       </v-row>
+      -->
     </v-container>
   </v-app-bar>
 </template>
@@ -57,8 +59,10 @@
 <script setup>
 import { ref } from 'vue';
 
-  import { useCounterStore } from '@/store/DataManager'
+import { useRouter } from 'vue-router';
+import { useCounterStore } from '@/store/DataManager'
   
+const router = useRouter(); 
 const store =useCounterStore()
 // 검색 옵션 및 카테고리 설정
 const searchOptions = ["전체", "제목", "저자"];
@@ -67,9 +71,11 @@ const categories = ["카테고리1", "카테고리2", "카테고리3", "카테�
 
 const keyword = ref('');
 const onSearch = () => {
-  store.keyword=keyword;
-  store.searchKeyword(keyword);
   console.log("검색 기준:", searchType.value);
+};
+const navigateToAbout = () => {
+  const path=`/`;
+  router.push(path);
 };
 </script>
 

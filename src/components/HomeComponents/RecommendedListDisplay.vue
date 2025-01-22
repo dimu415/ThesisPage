@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto pa-5"  flat color="orange">
+  <v-card class="mx-auto pa-5"  flat>
         <!-- 카드 타이틀 -->
         <v-card-title>
           RecommendedList
@@ -11,7 +11,7 @@
           <v-col v-for="item in items"
           :key="item.id"
           cols="4">
-            <v-card  class="square-card" color="green">
+            <v-card  class="square-card" >
               <v-card-title>
                 {{ item.title }}
               </v-card-title>

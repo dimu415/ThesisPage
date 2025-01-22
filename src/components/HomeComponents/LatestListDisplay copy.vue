@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" flat color="orange">
+  <v-card class="mx-auto" flat >
         <!-- 카드 타이틀 -->
         <v-card-title>
           LatestList
@@ -7,10 +7,11 @@
 
         <v-divider class="border-opacity-75" color="success" ></v-divider>
         <!-- 리스트 -->
-        <v-list lines="two" rounded="lg"  class="rounded-xl" bg-color="green">
+        <v-list lines="two" rounded="lg"  class="rounded-xl" >
           <v-list-item
             v-for="item in items"
             :key="item.id"
+            @click="nav"
           >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
             <v-list-item-subtitle>Subtitle for {{ item.title }}</v-list-item-subtitle>
@@ -22,6 +23,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useCounterStore } from '@/store/DataManager.js'
+const store =useCounterStore()
 
 const items = ref([]);
 const initializeItems = () => {
@@ -30,7 +33,9 @@ const initializeItems = () => {
         { id: 2, title: 'Latest Topic 2' },
       ];
 };
-
+const nav=()=>{
+  store.navigateToAbout_Post_List("ca","te");
+}
 onMounted(() => {
   initializeItems();
 });
