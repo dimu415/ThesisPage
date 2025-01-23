@@ -3,8 +3,8 @@
     <v-container>
       <!-- 첫 번째 줄: 타이틀  -->
       <v-row justify="center" class="mb-3 text-center">
-        <v-app-bar-title @click="navigateToAbout">
-          Title
+        <v-app-bar-title >
+          <v-btn @click="navigateToAbout">Title</v-btn>
         </v-app-bar-title>
       </v-row>
        

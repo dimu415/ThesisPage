@@ -11,10 +11,10 @@
           <v-list-item
             v-for="item in items"
             :key="item.id"
-            @click="nav"
+            @click="nav(item.id)"
           >
             <v-list-item-title>{{ item.title }}</v-list-item-title>
-            <v-list-item-subtitle>Subtitle for {{ item.title }}</v-list-item-subtitle>
+            <v-list-item-subtitle> {{ item.Main_Category }}/{{ item.Sub_Category }}   {{ item.date }}</v-list-item-subtitle>
           </v-list-item>
         </v-list>
         <v-divider class="border-opacity-75" color="success" ></v-divider>
@@ -27,18 +27,30 @@ import { useCounterStore } from '@/store/DataManager.js'
 const store =useCounterStore()
 
 const items = ref([]);
+
 const initializeItems = () => {
-      items.value = [
-        { id: 1, title: 'Latest Topic 1' },
-        { id: 2, title: 'Latest Topic 2' },
-      ];
+  const Posts=store.posts.slice(-3);
+  Posts.forEach(post => {
+    items.value.push({
+      id: post.PostId, 
+      title: post.Title, 
+      Main_Category: post.MainCategory ,
+      Sub_Category: post.SubCategory,
+      date: post.Date
+    })
+    
+  });
+  console.log(store.indexedPosts);
 };
-const nav=()=>{
-  store.navigateToAbout_Post_List("ca","te");
-}
+
 onMounted(() => {
   initializeItems();
 });
+
+const nav=(id)=>{
+  store.asd(id);
+  
+}
 </script>
 
 <style>

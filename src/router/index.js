@@ -19,6 +19,11 @@ const routes = [
         name: 'PostList',
         component: () => import('@/views/PostListPage.vue'),
       },
+      {
+        path: '/:MainCategory/:SubCategory/:PostID',
+        name: 'Post',
+        component: () => import('@/views/PostPage.vue'),
+      },
     ],
   },
 ]

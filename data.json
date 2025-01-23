@@ -1,0 +1,37 @@
+{
+    "posts": [
+      {
+        "PostId": 1,
+        "Title":"asd1",
+        "MainCategory": "Technology",
+        "SubCategory": "Programming",
+        "Content": "Learning JavaScript is essential for modern web development.",
+        "Date": "2025-01-22"
+      },
+      {
+        "PostId": 2,
+        "Title":"asd2",
+        "MainCategory": "Health",
+        "SubCategory": "Fitness",
+        "Content": "Daily exercise improves mental and physical health.",
+        "Date": "2025-01-21"
+      },
+      {
+        "PostId": 3,
+        "Title":"asd3",
+        "MainCategory": "Education",
+        "SubCategory": "Mathematics",
+        "Content": "Understanding algebra is key to mastering higher math.",
+        "Date": "2025-01-20"
+      },
+      {
+        "PostId": 4,
+        "Title":"asd4",
+        "MainCategory": "Technology",
+        "SubCategory": "AI",
+        "Content": "Artificial Intelligence is transforming industries.",
+        "Date": "2025-01-19"
+      }
+    ]
+  }
+  

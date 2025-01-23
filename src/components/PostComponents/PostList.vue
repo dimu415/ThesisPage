@@ -60,6 +60,7 @@ const FunC_post=()=>{
     console.log("Post_Name");
     console.log("Post_Content");
     console.log("Post_Content");
+    store.asd2(1);
 }
 const FunC_writer=(writer)=>{
     console.log(writer);

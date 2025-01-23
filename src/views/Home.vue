@@ -19,4 +19,8 @@
   import LatestListDisplayCopy from '@/components/HomeComponents/LatestListDisplay copy.vue';
   import RecommendedListDisplay from '@/components/HomeComponents/RecommendedListDisplay.vue';
   import PopularListDisplay from '@/components/HomeComponents/PopularListDisplay.vue';
+  import { ref, watch,onBeforeMount } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { useCounterStore } from '@/store/DataManager.js'
+  const store =useCounterStore()
 </script>
