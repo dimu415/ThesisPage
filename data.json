@@ -31,6 +31,38 @@
         "SubCategory": "AI",
         "Content": "Artificial Intelligence is transforming industries.",
         "Date": "2025-01-19"
+      },
+      {
+        "PostId": 5,
+        "Title":"asd15",
+        "MainCategory": "Technology",
+        "SubCategory": "Programming",
+        "Content": "Learning JavaScript is essential for modern web development.",
+        "Date": "2025-01-22"
+      },
+      {
+        "PostId": 6,
+        "Title":"as82",
+        "MainCategory": "Health",
+        "SubCategory": "Fitness",
+        "Content": "Daily exercise improves mental and physical health.",
+        "Date": "2025-01-21"
+      },
+      {
+        "PostId": 7,
+        "Title":"asd37",
+        "MainCategory": "Education",
+        "SubCategory": "Mathematics",
+        "Content": "Understanding algebra is key to mastering higher math.",
+        "Date": "2025-01-20"
+      },
+      {
+        "PostId": 8,
+        "Title":"asd4",
+        "MainCategory": "Technology",
+        "SubCategory": "AI",
+        "Content": "Artificial Intelligence is transforming industries.",
+        "Date": "2025-01-19"
       }
     ]
   }

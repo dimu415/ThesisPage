@@ -1,16 +1,10 @@
 <template>
-  
   <v-row>
-    <v-col>
-      <RecommendedListDisplay />
+    <v-col cols="12">
+      <RecommendedListDisplay/>
     </v-col>
-  </v-row>
-  <v-row>
     <v-col>
       <LatestListDisplayCopy/>
-    </v-col>
-    <v-col> 
-      <PopularListDisplay/>
     </v-col>
   </v-row>
 </template>

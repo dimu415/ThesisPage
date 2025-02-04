@@ -1,46 +1,53 @@
 <template>
-  <v-card class="mx-auto pa-5"  flat>
-        <!-- 카드 타이틀 -->
-        <v-card-title>
-          RecommendedList
-        </v-card-title>
-
-        <v-divider class="border-opacity-75 mb-5" color="success" ></v-divider>
-        <!-- 리스트 -->
-         <v-row>
-          <v-col v-for="item in items"
-          :key="item.id"
-          cols="4">
-            <v-card  class="square-card" >
-              <v-card-title>
+    <v-slide-group show-arrows>
+      <v-slide-group-item
+        v-for="item in items"
+          :key="item.title"
+      >
+        <v-card class="ma-4">
+            <v-img
+              src='https://cdn.vuetifyjs.com/images/cards/house.jpg'
+              class="align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+              width="255px"
+              cover
+            >
+              <v-card-title class="text-white" >
                 {{ item.title }}
               </v-card-title>
-              <v-card-text>
-                {{ item.title }}
-              </v-card-text>
-            </v-card>
-          </v-col>
-         </v-row>
-      </v-card>
+            </v-img>
+          </v-card>
+      </v-slide-group-item>
+    </v-slide-group>
+
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useCounterStore } from '@/store/DataManager.js'
+const store =useCounterStore()
 
 const items = ref([]);
+
 const initializeItems = () => {
-      items.value = [
-        { id: 1, title: 'Recommended Topic 1' },
-        { id: 2, title: 'Recommended Topic 2' },
-        { id: 2, title: 'Recommended Topic 3' },
-        { id: 2, title: 'Recommended Topic 4' },
-        { id: 2, title: 'Recommended Topic 5' },
-      ];
+  store.posts.forEach(post => {
+    items.value.push({
+      id: post.PostId, 
+      title: post.Title, 
+    })
+    
+  });
 };
 
 onMounted(() => {
   initializeItems();
 });
+
+const nav=(id)=>{
+  store.asd(id);
+  
+}
 </script>
 
 <style>

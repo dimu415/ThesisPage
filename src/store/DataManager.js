@@ -8,21 +8,24 @@ import { useRouter } from 'vue-router';
 export const useCounterStore = defineStore('jinmun', () => {
   
 const router = useRouter(); 
-  const Main_Category = ref();
-  const Sub_Category = ref();
+  const Category=ref({});
   const posts=ref();
   const indexedPosts = ref();
 
-  const Select_MainCategory=ref();
-  const Select_SubCategory=ref();
-  const Select_PostId=ref();
 
-const navigateToPost_List = () => {
-  const path=`/${Select_MainCategory.value}/${Select_SubCategory.value}`;
+const navigateToPost_List = (main,sub) => {
+  const path=`/${main}/${sub}`;
   router.push(path);
 };
-const navigateToPost = () => {
-  const path=`/${Select_MainCategory.value}/${Select_SubCategory.value}/${Select_PostId.value}`;
+const navigateToPost = (id) => {
+  const PostInfo=indexedPosts[id];
+
+  console.log(`id:${id},PostInfo:${PostInfo}`);
+  const Select_MainCategory=PostInfo.MainCategory;
+  const Select_SubCategory=PostInfo.SubCategory;
+  const Select_PostId=PostInfo.PostId;
+
+  const path=`/${Select_MainCategory}/${Select_SubCategory}/${Select_PostId}`;
   router.push(path);
 };
 
@@ -34,35 +37,29 @@ const JsonFileRead = async () => {
     }
     const jsonData = await response.json();
     posts.value = jsonData.posts;
+   
 
-    // mainCategory와 subCategory 배열로 수집
-    Main_Category.value = [...new Set(posts.value.map(post => post.MainCategory))];
-    Sub_Category.value = [...new Set(posts.value.map(post => post.SubCategory))];
-    
+    posts.value.forEach(post => {
+        const main = post.MainCategory;
+        const sub = post.SubCategory;
+
+        // mainCategory가 이미 e 객체에 있으면 해당 subCategory 추가, 없으면 새로운 배열 생성
+        if (!Category.value[main]) {
+          Category.value[main] = []; // mainCategory가 없으면 빈 배열로 초기화
+        }
+        if(!Category.value[main].includes(sub)){
+          Category.value[main].push(sub); // subCategory를 mainCategory 배열에 추가
+        }
+        
+      });
     posts.value.forEach((post) => {
       indexedPosts[post.PostId] = post;
     });
     
-    console.log('indexedPosts:', indexedPosts);
   } catch (error) {
     console.error('JSON 파일 읽기 실패:', error);
   }
 };
-const asd=(id)=>{
-  const PostInfo=indexedPosts[id];
-   Select_MainCategory.value=PostInfo.MainCategory;
-   Select_SubCategory.value=PostInfo.SubCategory;
-  navigateToPost_List()
-  
-}
-const asd2=(id)=>{
-  const PostInfo=indexedPosts[id];
-   Select_MainCategory.value=PostInfo.MainCategory;
-   Select_SubCategory.value=PostInfo.SubCategory;
-   Select_PostId.value=PostInfo.PostId;
-   navigateToPost()
-  
-}
 const searchPosts = (keyword) => { //KEYWORD SEARCH
   return posts.filter(
     (post) =>
@@ -81,13 +78,10 @@ const filterByCategory = (mainCategory, subCategory) => { //Category filter
 };
 
     return {posts,
-      Main_Category,
-      Sub_Category,
-      Select_MainCategory,
-      Select_SubCategory,
+      Category,
       indexedPosts,
       navigateToPost_List,
       navigateToPost,
-      JsonFileRead,asd,asd2
+      JsonFileRead,
     }
 })
