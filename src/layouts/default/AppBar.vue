@@ -14,6 +14,7 @@
         <v-col cols="4" class="d-flex">
           <v-card-text class="py-0">
             <v-text-field
+              v-model="searchQuery"
               :loading="loading"
               append-inner-icon="mdi-magnify"
               density="compact"
@@ -26,61 +27,61 @@
             </v-text-field>
           </v-card-text>
         </v-col>
-        <v-col cols="6" class="d-flex justify-end">
-          <v-btn
-            v-for="link in links"
-            :key="link"
-            size="x-small"
-            rounded="xl"
-            variant="text"
-            @click="navigateToAbout(link.link)"
-          >
-            {{ link.name }}
+        <v-col cols="6" class="d-flex justify-end align-center">
+  <!-- 버튼들 수평 정렬 -->
+  <v-btn
+    v-for="link in links"
+    :key="link"
+    size="small"
+    rounded="xl"
+    variant="text"
+    @click="navigateToAbout(link.link)"
+  >
+    {{ link.name }}
+  </v-btn>
+
+  <!-- 사용자 메뉴 버튼 (우측 상단) -->
+  <v-menu min-width="200">
+    <template v-slot:activator="{ props }">
+      <v-btn icon v-bind="props">
+        <v-avatar>
+          <v-img
+          v-if="user.state"
+            alt="John"
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+          ></v-img>
+          <v-icon
+          v-else icon="mdi-account-circle"></v-icon>
+        </v-avatar>
+      </v-btn>
+    </template>
+    <v-card>
+      <v-card-text>
+        <div class="mx-auto text-center">
+          <v-avatar color="brown">
+            <span class="text-h5">{{ user.initials }}</span>
+          </v-avatar>
+          <div v-if="user.state">
+            <p class="text-caption mt-1">{{ user.email }}</p>
+            <h3>{{ user.fullName }}</h3>
+            <v-btn size="x-small" @click="user.state=false">
+              <p class="text-caption mt-1">Logout</p>
+            </v-btn>
+          </div>
+          <v-btn v-else size="small" @click="user.state=true">
+            <p class="text-caption mt-1">Login</p>
           </v-btn>
-          <v-menu min-width="200px">
-            <template v-slot:activator="{ props }">
-              <v-btn icon v-bind="props">
-                <v-avatar color="brown" size="small">
-                  <span class="text-h5">{{ user.initials }}</span>
-                </v-avatar>
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-text>
-                <div class="mx-auto text-center">
-                  <v-avatar color="brown">
-                    <span class="text-h5">{{ user.initials }}</span>
-                  </v-avatar>
-                  <div v-if="user.state">
-                    <p class="text-caption mt-1">
-                      {{ user.email }}
-                    </p>
-                    <h3>{{ user.fullName }}</h3>
-                    <v-btn  size="x-small" @click="user.state=false">
-                      <p class="text-caption mt-1">
-                        Logout
-                      </p>
-                    </v-btn>
-                  </div>
-                  <v-btn v-else  size="small" @click="user.state=true">
-                    <p class="text-caption mt-1">
-                      Login
-                    </p>
-                  </v-btn>
-                  
-                  <v-divider class="my-3"></v-divider>
-                  <v-btn variant="text" rounded>
-                    Edit Account
-                  </v-btn>
-                  <v-divider class="my-3"></v-divider>
-                  <v-btn variant="text" rounded @click="navigateToAbout(`/PostCreate`)">
-                    CreatePost
-                  </v-btn>
-                </div>
-              </v-card-text>
-            </v-card>
-      </v-menu>
-        </v-col>
+          
+          <v-divider class="my-3"></v-divider>
+          <v-btn variant="text" rounded>Edit Account</v-btn>
+          <v-divider class="my-3"></v-divider>
+          <v-btn variant="text" rounded @click="navigateToAbout(`/PostCreate`)">CreatePost</v-btn>
+        </div>
+      </v-card-text>
+    </v-card>
+  </v-menu>
+</v-col>
+
       </v-row>
       <!-- 세 번째 줄: 카테고리 -->
      
@@ -124,6 +125,7 @@ import { useCounterStore } from '@/store/DataManager'
 const router = useRouter(); 
 const store =useCounterStore()
 // 검색 옵션 및 카테고리 설정
+const searchQuery=ref("");
 const loaded = ref(false);
 const loading = ref(false); 
 const links = [
@@ -141,12 +143,15 @@ const user = ref({
 });
 
 const onClick = () => {
+  
   loading.value = true;
-
-  setTimeout(() => {
-    loading.value = false;
-    loaded.value = true;
-  }, 2000);
+  search();
+};
+const search = () => {
+  if (searchQuery.value.trim() !== '') {
+    router.push({ path: '/search', query: { searchQuery: searchQuery.value} });
+  }
+  loading.value = false;
 };
 const navigateToAbout = (path) => {
   //const path=`/`;

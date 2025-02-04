@@ -22,6 +22,11 @@ const routes = [
         component: () => import('@/views/PostPage.vue'),
       },
       {
+        path: '/search',
+        name: 'Search',
+        component: () => import('@/views/PostSearchList.vue'),
+      },
+      {
         path: '/PostCreate',
         name: 'PostCreate',
         component: () => import('@/views/CreatePostPage.vue'),

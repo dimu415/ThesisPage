@@ -13,11 +13,11 @@ const router = useRouter();
   const indexedPosts = ref();
 
 
-const navigateToPost_List = (main,sub) => {
+const navigateToPost_List = (main,sub) => {//게시물 리스트이동
   const path=`/${main}/${sub}`;
   router.push(path);
 };
-const navigateToPost = (id) => {
+const navigateToPost = (id) => { //게시물 이동
   const PostInfo=indexedPosts[id];
 
   console.log(`id:${id},PostInfo:${PostInfo}`);
@@ -29,7 +29,7 @@ const navigateToPost = (id) => {
   router.push(path);
 };
 
-const JsonFileRead = async () => {
+const JsonFileRead = async () => {//json파일읽기
   try {
     const response = await fetch('/data.json'); // JSON 파일 경로
     if (!response.ok) {
@@ -61,25 +61,19 @@ const JsonFileRead = async () => {
   }
 };
 const searchPosts = (keyword) => { //KEYWORD SEARCH
-  return posts.filter(
+  
+  return posts.value.filter(
     (post) =>
-      post.title.includes(keyword) ||
-      post.content.includes(keyword) ||
-      post.mainCategory.includes(keyword) ||
-      post.subCategory.includes(keyword)
+      post.Title.includes(keyword) ||
+      post.Content.includes(keyword) ||
+      post.MainCategory.includes(keyword) ||
+      post.SubCategory.includes(keyword)
   );
 };
-const filterByCategory = (mainCategory, subCategory) => { //Category filter
-  return posts.filter(
-    (post) =>
-      post.mainCategory === mainCategory &&
-      (!subCategory || post.subCategory === subCategory)
-  );
-};
-
     return {posts,
       Category,
       indexedPosts,
+      searchPosts,
       navigateToPost_List,
       navigateToPost,
       JsonFileRead,
